@@ -22,7 +22,7 @@ and empirically demonstrate that it is sufficient for the ReID tasks. Based on t
 
 ## Prerequisites
 
-- Please see [install.md](install.md) for installation.
+- Please see [install.md](INSTALL.md) for installation.
 
 ## Train
 
