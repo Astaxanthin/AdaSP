@@ -1,0 +1,52 @@
+_BASE_: ../Base-bagtricks.yml
+
+INPUT:
+  SIZE_TRAIN: [256, 256]
+  SIZE_TEST: [256, 256]
+
+MODEL:
+  META_ARCHITECTURE: Baseline 
+
+  BACKBONE:
+    WITH_IBN: True
+    NORM: BN
+
+    PRETRAIN_PATH: './pretrained/resnet50_ibn_a-d9d0bb7b.pth'
+  HEADS:
+    POOL_LAYER: GeneralizedMeanPooling
+    NORM: BN 
+    CLS_LAYER: Linear 
+    SCALE: 1   
+    MARGIN: 0. 
+    CLS_ENABLE: False  
+
+    NECK_FEAT: after
+
+  LOSSES:
+    NAME: ( "TripletLoss", )  
+    TRI:
+      HARD_MINING: True
+      MARGIN: 0.0
+      SCALE: 1.0
+
+
+DATASETS:
+  NAMES: ("VehicleID",)
+  TESTS: ("SmallVehicleID", "MediumVehicleID", "LargeVehicleID",)
+
+DATALOADER:
+  NUM_INSTANCE: 8
+
+SOLVER:
+  
+  IMS_PER_BATCH: 512 
+  MAX_EPOCH: 120
+  STEPS: [30, 70, 90]
+  WARMUP_ITERS: 2000  
+  CHECKPOINT_PERIOD: 20
+
+TEST:
+  EVAL_PERIOD: 10
+  IMS_PER_BATCH: 128
+
+OUTPUT_DIR: ./logs/vehicleid/norm_single_triplet

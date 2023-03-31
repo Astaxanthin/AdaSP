@@ -1,0 +1,38 @@
+_BASE_: ../Base-MGN.yml
+
+INPUT:
+  SIZE_TRAIN: [384, 128]
+  SIZE_TEST: [384, 128]
+
+MODEL:
+  BACKBONE:
+    WITH_IBN: True
+    PRETRAIN_PATH: './pretrained/resnet50_ibn_a-d9d0bb7b.pth'
+    NORM: BN #for 1 GPU
+
+  LOSSES:
+    NAME: ("MSLoss", ) 
+
+  HEADS:
+    CLS_LAYER: Linear  
+    NECK_FEAT: after
+    SCALE: 1  
+    MARGIN: 0.   
+    CLS_ENABLE: True  
+    EMBEDDING_DIM: 256
+
+DATALOADER:
+  NUM_INSTANCE: 8  
+  SAMPLER_TRAIN: BalancedIdentitySampler
+
+SOLVER:
+  BASE_LR: 0.00035  
+  IMS_PER_BATCH: 128   
+  WARMUP_ITERS: 500  
+  FREEZE_ITERS: 500  
+
+DATASETS:
+  NAMES: ("Market1501",)
+  TESTS: ("Market1501",)
+
+OUTPUT_DIR: ./logs/market1501/mgn_single_ms_128_8

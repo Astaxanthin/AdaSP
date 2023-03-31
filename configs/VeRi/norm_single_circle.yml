@@ -1,0 +1,54 @@
+_BASE_: ../Base-SBS.yml
+
+INPUT:
+  SIZE_TRAIN: [256, 256]
+  SIZE_TEST: [256, 256]
+
+MODEL :
+  META_ARCHITECTURE: Baseline  
+
+  BACKBONE:
+    NAME: build_resnet_backbone 
+    WITH_IBN: True
+    WITH_NL: False 
+    NORM: BN #for 1 GPU
+    PRETRAIN: True  
+    PRETRAIN_PATH: './pretrained/resnet50_ibn_a-d9d0bb7b.pth'
+    EXTRA_BN: False 
+
+  HEADS:
+    NORM: BN  
+    CLS_ENABLE: False  
+    EMBEDDING_DIM: 0 
+    WITH_BNNECK: True
+    CLS_LAYER: Linear
+    SCALE: 1
+    MARGIN: 0.
+
+  LOSSES:
+    NAME: ( "CircleLoss", ) 
+    CIRCLE:
+      SCALE: 1.0
+
+SOLVER:
+  BASE_LR: 0.00035  
+  IMS_PER_BATCH: 128   
+  MAX_EPOCH: 60  
+  WARMUP_ITERS: 1500
+  FREEZE_ITERS: 1500  
+  DELAY_EPOCHS: 30
+  CHECKPOINT_PERIOD: 10
+
+DATASETS:
+  NAMES: ( "VeRi",) 
+  TESTS: ( "VeRi", ) 
+
+DATALOADER:
+  NUM_INSTANCE: 8
+  SAMPLER_TRAIN: BalancedIdentitySampler
+
+TEST:
+  EVAL_PERIOD: 10
+  IMS_PER_BATCH: 256
+
+OUTPUT_DIR: ./logs/veri/norm_single_circle

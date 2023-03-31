@@ -1,0 +1,45 @@
+_BASE_: ../Base-MGN.yml
+
+INPUT:
+  SIZE_TRAIN: [384, 128]
+  SIZE_TEST: [384, 128]
+
+MODEL:
+  BACKBONE:
+    WITH_IBN: True
+    PRETRAIN_PATH: './pretrained/resnet50_ibn_a-d9d0bb7b.pth'
+    NORM: BN #for 1 GPU
+
+  LOSSES:
+    NAME: ( "AdaSPLoss", ) 
+
+    ADASP:
+      SCALE: 1.0
+      TEMP: 0.04
+      TYPE: 'adasp'
+  
+  HEADS:
+    NORM: BN #for 1 GPU
+    NECK_FEAT: after
+    POOL_LAYER: GeneralizedMeanPoolingP
+    CLS_LAYER: Linear  
+    SCALE: 1  
+    MARGIN: 0.   
+    CLS_ENABLE: True  
+    EMBEDDING_DIM: 256
+
+DATALOADER:
+  NUM_INSTANCE: 8
+  SAMPLER_TRAIN: BalancedIdentitySampler
+
+SOLVER:
+  BASE_LR: 0.00035  
+  IMS_PER_BATCH: 128   
+  WARMUP_ITERS: 500  
+  FREEZE_ITERS: 500  
+
+DATASETS:
+  NAMES: ("DukeMTMC",)
+  TESTS: ("DukeMTMC",)
+
+OUTPUT_DIR: ./logs/dukemtmc/mgn_single_adasp

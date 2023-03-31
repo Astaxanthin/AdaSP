@@ -1,0 +1,44 @@
+_BASE_: ../Base-MGN.yml
+
+INPUT:
+  SIZE_TRAIN: [384, 128]
+  SIZE_TEST: [384, 128]
+
+
+MODEL:
+  BACKBONE:
+    WITH_IBN: True
+    PRETRAIN_PATH: '/mnt/dolphinfs/hdd_pool/docker/user/hadoop-vacv/zhouxiao/research/fast-reid-master-mixstyle/pretrained/resnet50_ibn_a-d9d0bb7b.pth'
+    #PRETRAIN_PATH: '/mnt/dolphinfs/hdd_pool/docker/user/hadoop-vacv/zhouxiao/research/fast-reid-master-mixstyle/pretrained/lupws_r50.pth'
+
+  LOSSES:
+    NAME: ( "CrossEntropyLoss", )  #"SupConLoss", ) #, "MoCoLoss", "MaxCone")  #default ("CrossEntropyLoss","TripletLoss",)
+
+    MAXCONE:
+      SCALE: 1.0
+      TEMP: 0.05
+      TYPE: 'adaptive'
+    
+  HEADS:
+    CLS_LAYER: Linear  # CircleSoftmax
+    SCALE: 1  #64
+    MARGIN: 0.   #0.35
+    CLS_ENABLE: True  # True
+    EMBEDDING_DIM: 256
+
+DATALOADER:
+  
+  NUM_INSTANCE: 16  ## default 16
+
+SOLVER:
+  BASE_LR: 0.00035  ## default 0.00035
+  IMS_PER_BATCH: 128  ## default 64
+  WARMUP_ITERS: 1000 ## default 2000
+  FREEZE_ITERS: 500  ## default 1000
+
+
+DATASETS:
+  NAMES: ("MSMT17",)
+  TESTS: ("MSMT17",)
+
+OUTPUT_DIR: /mnt/dolphinfs/hdd_pool/docker/user/hadoop-vacv/zhouxiao/research/fast-reid-master-mixstyle/logs/msmt17/imgnet_mgn_single_CE_128_16
