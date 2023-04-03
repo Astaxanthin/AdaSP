@@ -28,7 +28,7 @@ and empirically demonstrate that it is sufficient for the ReID tasks. Based on t
 ```python
 # assume that you are under the root directory of this project,
 # and you have activated your virtual environment if needed.
-# and with all ReID datasets you need in '/datasets/'.
+# and with all ReID datasets you need in './datasets/'.
 
 # For example, ReID tasks using ID loss (cross entropy) and metric loss (AdaSP) on the DukeMTMC dataset
 python tools/train_net.py --config-file configs/DukeMTMC/mgn_CE_adasp.yml MODEL.DEVICE "cuda:0" 
