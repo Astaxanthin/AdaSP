@@ -1,7 +1,6 @@
 
 # Adaptive Sparse Pairwise Loss for Object Re-Identification (**CVPR 2023**)  
-[Paper]
-<!-- (https://arxiv.org/abs/2108.07755)  -->
+[Paper](https://arxiv.org/abs/2303.18247) 
 <!-- &nbsp; &nbsp;  -->
 
 
@@ -57,6 +56,12 @@ Thanks fastreid team for the wonderful open source project!
 If you find AdaSP useful in your research, please consider citing:
 
 ```
-@inproceedings{
+@misc{zhou2023adaptive,
+      title={Adaptive Sparse Pairwise Loss for Object Re-Identification}, 
+      author={Xiao Zhou and Yujie Zhong and Zhen Cheng and Fan Liang and Lin Ma},
+      year={2023},
+      eprint={2303.18247},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
 }
 ```
