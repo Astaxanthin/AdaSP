@@ -56,12 +56,11 @@ Thanks fastreid team for the wonderful open source project!
 If you find AdaSP useful in your research, please consider citing:
 
 ```
-@misc{zhou2023adaptive,
-      title={Adaptive Sparse Pairwise Loss for Object Re-Identification}, 
-      author={Xiao Zhou and Yujie Zhong and Zhen Cheng and Fan Liang and Lin Ma},
-      year={2023},
-      eprint={2303.18247},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@inproceedings{zhou2023adaptive,
+  title={Adaptive Sparse Pairwise Loss for Object Re-Identification},
+  author={Zhou, Xiao and Zhong, Yujie and Cheng, Zhen and Liang, Fan and Ma, Lin},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={19691--19701},
+  year={2023}
 }
 ```
