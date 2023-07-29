@@ -1,6 +1,6 @@
 
 # Adaptive Sparse Pairwise Loss for Object Re-Identification (**CVPR 2023**)  
-[Paper](https://arxiv.org/abs/2303.18247) 
+[Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Zhou_Adaptive_Sparse_Pairwise_Loss_for_Object_Re-Identification_CVPR_2023_paper.pdf) 
 <!-- &nbsp; &nbsp;  -->
 
 
